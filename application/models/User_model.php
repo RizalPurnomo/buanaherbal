@@ -24,7 +24,7 @@ class User_model extends CI_Model
         return  "Data " . $username . " Berhasil Diupdate";
     }
 
-    public function getAllUser()
+    public function getAllData()
     {
         $sql = "SELECT * FROM user order by id_user desc";
         $qry = $this->db->query($sql);
@@ -49,9 +49,9 @@ class User_model extends CI_Model
         $this->db->delete($tabel);
     }
 
-    public function getUserById($idUser)
+    public function getDataById($idData)
     {
-        $query = "SELECT * FROM user WHERE id_user='$idUser'";
+        $query = "SELECT * FROM user WHERE id_user='$idData'";
         $sql = $this->db->query($query);
         return $sql->result_array();
     }
