@@ -7,7 +7,7 @@
         console.log(idData);
         $.ajax({
             success: function(html) {
-                var url = "<?php echo base_url(); ?>barang/edit/" + idData;
+                var url = "<?php echo base_url(); ?>pembelian/edit/" + idData;
                 window.location.href = url;
             }
         });
@@ -23,10 +23,10 @@
             if (result.isConfirmed) {
                 $.ajax({
                     type: "POST",
-                    url: "<?php echo base_url(); ?>barang/delete/" + idData,
+                    url: "<?php echo base_url(); ?>pembelian/delete/" + idData,
                     success: function(html) {
                         console.log(html);
-                        var url = "<?php echo base_url(); ?>barang/";
+                        var url = "<?php echo base_url(); ?>pembelian/";
                         window.location.href = url;
                     }
                 })
@@ -64,7 +64,7 @@
             <div class="card">
                 <div class="card-header">
                     <!-- <h3 class="card-title">DataTable with default features</h3> -->
-                    <a href="<?php echo base_url(); ?>barang/add" class="btn btn-app">
+                    <a href="<?php echo base_url(); ?>pembelian/add" class="btn btn-app">
                         <i class="fa fa-plus" aria-hidden="true"></i> Tambah
                     </a>
                 </div>
@@ -75,34 +75,27 @@
                             <thead>
                                 <tr>
                                     <th>No </th>
-                                    <th>Id Barang</th>
-                                    <th>Nama Barang</th>
-                                    <th>Barcode</th>
-                                    <th>Kategori</th>
-                                    <th>Stock</th>
-                                    <th>Satuan</th>
-                                    <th>Harga Jual</th>
+                                    <th>Id pembelian</th>
+                                    <th>Tanggal</th>
+                                    <th>Supplier</th>
+                                    <th>Create By</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php if (!empty($barang)) {
-                                    for ($a = 0; $a < count($barang); $a++) { ?>
-                                        <?php $idbarang = $barang[$a]['id_barang']; ?>
-                                        <tr id="barang<?php echo $idbarang; ?>">
+                                <?php if (!empty($pembelian)) {
+                                    for ($a = 0; $a < count($pembelian); $a++) { ?>
+                                        <?php $idpembelian = $pembelian[$a]['id_pembelian']; ?>
+                                        <tr id="pembelian<?php echo $idpembelian; ?>">
                                             <td><?php echo $a + 1 ?></td>
-                                            <td><?php echo $idbarang ?></td>
-                                            <td><?php echo $barang[$a]['nama_barang'] ?></td>
-                                            <td><?php echo $barang[$a]['barcode'] ?></td>
-                                            <td><?php echo $barang[$a]['kategori'] ?></td>
-                                            <td><?php echo $barang[$a]['stock'] ?></td>
-                                            <td><?php echo $barang[$a]['satuan'] ?></td>
-                                            <td><?php echo $barang[$a]['harga_juals'] ?></td>
-
+                                            <td><?php echo $idpembelian ?></td>
+                                            <td><?php echo $pembelian[$a]['tgl_pembelian'] ?></td>
+                                            <td><?php echo $pembelian[$a]['nama_suplier'] ?></td>
+                                            <td><?php echo $pembelian[$a]['real_name'] ?></td>
                                             <td>
                                                 <div class="text-center">
-                                                    <a class="btn btn-large btn-primary" href="javascript:selectData('barang<?php echo $barang[$a]['id_barang']; ?>')">Edit</a>
-                                                    | <a class="btn btn-large btn-danger" href="javascript:deleteData('barang<?php echo $barang[$a]['id_barang']; ?>')">Delete</a>
+                                                    <a class="btn btn-large btn-primary" href="javascript:selectData('pembelian<?php echo $pembelian[$a]['id_pembelian']; ?>')">Edit</a>
+                                                    | <a class="btn btn-large btn-danger" href="javascript:deleteData('pembelian<?php echo $pembelian[$a]['id_pembelian']; ?>')">Delete</a>
 
                                                 </div>
                                             </td>

@@ -101,8 +101,8 @@
 
                                             <td>
                                                 <div class="text-center">
-                                                    <a class="btn btn-large btn-primary" href="javascript:selectData('barang<?php echo $barang[$a]['id_barang']; ?>')">Edit</a>
-                                                    | <a class="btn btn-large btn-danger" href="javascript:deleteData('barang<?php echo $barang[$a]['id_barang']; ?>')">Delete</a>
+                                                    <a class="btn btn-large btn-primary" href="javascript:selectData('barang<?php echo $barang[$a]['id_barang']; ?>')"><i class="fas fa-edit"></i></a>
+                                                    | <a class="btn btn-large btn-danger" href="javascript:deleteData('barang<?php echo $barang[$a]['id_barang']; ?>')"><i class="fas fa-trash-alt"></i></a>
 
                                                 </div>
                                             </td>

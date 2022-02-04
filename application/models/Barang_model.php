@@ -16,6 +16,8 @@ class Barang_model extends CI_Model
         return $qry->result_array();
     }
 
+
+
     public function saveData($data, $tabel)
     {
         $this->db->insert($tabel, $data);
