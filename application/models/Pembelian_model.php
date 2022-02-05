@@ -12,7 +12,7 @@ class Pembelian_model extends CI_Model
     public function getAllData()
     {
         $sql = "SELECT * FROM pembelian a
-            INNER JOIN USER b ON a.id_user=b.id_user
+            INNER JOIN users b ON a.id_user=b.id_user
             INNER JOIN suplier c ON c.id_suplier=a.id_suplier
             ORDER BY a.id_pembelian DESC";
         $qry = $this->db->query($sql);
@@ -34,8 +34,13 @@ class Pembelian_model extends CI_Model
         return $idData;
     }
 
-    public function saveData($data, $tabel)
+    public function saveData($data)
     {
-        $this->db->insert($tabel, $data);
+        $this->db->insert('pembelian', $data);
+    }
+
+    public function saveDataDetail($data)
+    {
+        $this->db->insert('pembelian_detail', $data);
     }
 }

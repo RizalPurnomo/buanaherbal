@@ -32,11 +32,11 @@ class Pembelian extends CI_Controller
         $pembelian_detail      = $this->input->post('pembelian_detail');
 
         //insert Data
-        $this->pembelian_model->saveData($pembelian, 'pembelian');
+        $this->pembelian_model->saveData($pembelian);
 
         for ($i = 0; $i < count($pembelian_detail); $i++) {
             //insert Data Detail
-            $this->pembelian_model->saveData($pembelian_detail[$i], 'pembelian_detail');
+            $this->pembelian_model->saveDataDetail($pembelian_detail[$i]);
         }
     }
 

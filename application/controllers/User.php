@@ -27,7 +27,7 @@ class User extends CI_Controller
     public function saveData()
     {
         $data = $this->input->post('user');
-        $this->user_model->saveData($data, 'user');
+        $this->user_model->saveData($data);
         print_r($this->input->post());
     }
 
@@ -43,14 +43,14 @@ class User extends CI_Controller
     public function updateData($idData)
     {
         $user = $this->input->post('user');
-        $this->user_model->updateData($idData, $user, 'user');
+        $this->user_model->updateData($idData, $user);
         print_r($this->input->post());
     }
 
     function delete($idData)
     {
         if (isset($idData)) {
-            $this->user_model->deleteData($idData, "user");
+            $this->user_model->deleteData($idData);
         }
         return "Data Berhasil Di Delete";
     }
@@ -58,7 +58,7 @@ class User extends CI_Controller
     public function resetPassword($idData)
     {
         $user = $this->input->post('user');
-        $this->user_model->updateData($idData, $user, 'user');
+        $this->user_model->updateData($idData, $user);
         print_r($this->input->post());
     }
 }

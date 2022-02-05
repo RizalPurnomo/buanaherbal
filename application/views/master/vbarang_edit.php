@@ -16,9 +16,9 @@
                 "nama_barang": $("#namaBarang").val(),
                 "barcode": $("#barcode").val(),
                 "kategori": $("#kategori").val(),
-                "stock": $("#stock").val(),
+                "stock": $("#stock").val().replace(',', ''),
                 "satuan": $("#satuan").val(),
-                "harga_juals": $("#harga").val()
+                "harga_juals": $("#harga").val().replace(',', '')
             }
         }
 
@@ -101,7 +101,7 @@
                         <div class="form-group row">
                             <label for="stock" class="col-sm-2 col-form-label">Stock</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="stock" name="stock" placeholder="Stock" value="<?php echo $barang[0]['stock']; ?>">
+                                <input type="text" class="form-control" id="stock" name="stock" placeholder="Stock" value="<?php echo number_format($barang[0]['stock']); ?>">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -113,7 +113,7 @@
                         <div class="form-group row">
                             <label for="harga" class="col-sm-2 col-form-label">Harga Jual</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="harga" name="harga" placeholder="Harga Jual" value="<?php echo $barang[0]['harga_juals']; ?>">
+                                <input type="text" class="form-control" id="harga" name="harga" placeholder="Harga Jual" value="<?php echo number_format($barang[0]['harga_juals']); ?>">
                             </div>
                         </div>
                     </div>

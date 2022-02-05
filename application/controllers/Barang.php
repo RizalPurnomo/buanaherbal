@@ -28,7 +28,7 @@ class Barang extends CI_Controller
     public function saveData()
     {
         $data = $this->input->post('barang');
-        $this->barang_model->saveData($data, 'barang');
+        $this->barang_model->saveData($data);
         print_r($this->input->post());
     }
 
@@ -44,14 +44,14 @@ class Barang extends CI_Controller
     public function updateData($idData)
     {
         $barang = $this->input->post('barang');
-        $this->barang_model->updateData($idData, $barang, 'barang');
+        $this->barang_model->updateData($idData, $barang);
         print_r($this->input->post());
     }
 
     function delete($idData)
     {
         if (isset($idData)) {
-            $this->barang_model->deleteData($idData, "barang");
+            $this->barang_model->deleteData($idData);
         }
         return "Data Berhasil Di Delete";
     }

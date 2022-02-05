@@ -7,7 +7,7 @@
         console.log(idData);
         $.ajax({
             success: function(html) {
-                var url = "<?php echo base_url(); ?>barang/edit/" + idData;
+                var url = "<?php echo base_url(); ?>penjualan/edit/" + idData;
                 window.location.href = url;
             }
         });
@@ -23,10 +23,10 @@
             if (result.isConfirmed) {
                 $.ajax({
                     type: "POST",
-                    url: "<?php echo base_url(); ?>barang/delete/" + idData,
+                    url: "<?php echo base_url(); ?>penjualan/delete/" + idData,
                     success: function(html) {
                         console.log(html);
-                        var url = "<?php echo base_url(); ?>barang/";
+                        var url = "<?php echo base_url(); ?>penjualan/";
                         window.location.href = url;
                     }
                 })
@@ -44,12 +44,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Barang</h1>
+                    <h1 class="m-0">Penjualan</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>">Home</a></li>
-                        <li class="breadcrumb-item active">Barang</li>
+                        <li class="breadcrumb-item active">Penjualan</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -64,7 +64,7 @@
             <div class="card">
                 <div class="card-header">
                     <!-- <h3 class="card-title">DataTable with default features</h3> -->
-                    <a href="<?php echo base_url(); ?>barang/add" class="btn btn-app">
+                    <a href="<?php echo base_url(); ?>penjualan/add" class="btn btn-app">
                         <i class="fa fa-plus" aria-hidden="true"></i> Tambah
                     </a>
                 </div>
@@ -75,34 +75,27 @@
                             <thead>
                                 <tr>
                                     <th>No </th>
-                                    <th>Id Barang</th>
-                                    <th>Nama Barang</th>
-                                    <th>Barcode</th>
-                                    <th>Kategori</th>
-                                    <th>Stock</th>
-                                    <th>Satuan</th>
-                                    <th>Harga Jual</th>
+                                    <th>Id Penjualan</th>
+                                    <th>Tanggal</th>
+                                    <th>Customer</th>
+                                    <th>Create By</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php if (!empty($barang)) {
-                                    for ($a = 0; $a < count($barang); $a++) { ?>
-                                        <?php $idbarang = $barang[$a]['id_barang']; ?>
-                                        <tr id="barang<?php echo $idbarang; ?>">
+                                <?php if (!empty($penjualan)) {
+                                    for ($a = 0; $a < count($penjualan); $a++) { ?>
+                                        <?php $idpenjualan = $penjualan[$a]['id_penjualan']; ?>
+                                        <tr id="penjualan<?php echo $idpenjualan; ?>">
                                             <td><?php echo $a + 1 ?></td>
-                                            <td><?php echo $idbarang ?></td>
-                                            <td><?php echo $barang[$a]['nama_barang'] ?></td>
-                                            <td><?php echo $barang[$a]['barcode'] ?></td>
-                                            <td><?php echo $barang[$a]['kategori'] ?></td>
-                                            <td><?php echo number_format($barang[$a]['stock']) ?></td>
-                                            <td><?php echo $barang[$a]['satuan'] ?></td>
-                                            <td><?php echo number_format($barang[$a]['harga_juals']) ?></td>
-
+                                            <td><?php echo $idpenjualan ?></td>
+                                            <td><?php echo $penjualan[$a]['tgl_penjualan'] ?></td>
+                                            <td><?php echo $penjualan[$a]['nama_customer'] ?></td>
+                                            <td><?php echo $penjualan[$a]['real_name'] ?></td>
                                             <td>
                                                 <div class="text-center">
-                                                    <a class="btn btn-large btn-primary" href="javascript:selectData('barang<?php echo $barang[$a]['id_barang']; ?>')"><i class="fas fa-edit"></i></a>
-                                                    | <a class="btn btn-large btn-danger" href="javascript:deleteData('barang<?php echo $barang[$a]['id_barang']; ?>')"><i class="fas fa-trash-alt"></i></a>
+                                                    <a class="btn btn-large btn-primary" href="javascript:selectData('penjualan<?php echo $penjualan[$a]['id_penjualan']; ?>')">Edit</a>
+                                                    | <a class="btn btn-large btn-danger" href="javascript:deleteData('penjualan<?php echo $penjualan[$a]['id_penjualan']; ?>')">Delete</a>
 
                                                 </div>
                                             </td>

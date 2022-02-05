@@ -26,7 +26,7 @@ class Login extends CI_Controller
 			$login = array(
 				"last_login" => date("Y-m-d H:i:s")
 			);
-			$this->user_model->updateLastLogin($username, $login, 'user');
+			$this->user_model->updateLastLogin($username, $login);
 			redirect('dashboard');
 		} else {
 			redirect('login');

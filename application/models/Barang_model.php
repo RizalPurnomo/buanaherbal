@@ -16,11 +16,20 @@ class Barang_model extends CI_Model
         return $qry->result_array();
     }
 
-
-
-    public function saveData($data, $tabel)
+    public function getBarangReady()
     {
-        $this->db->insert($tabel, $data);
+        $sql = "SELECT * FROM pembelian_detail a
+            INNER JOIN barang b ON a.id_barang=b.id_barang
+            WHERE  (a.qty_masuk - a.qty_keluars + a.qty_opname)>0";
+        $qry = $this->db->query($sql);
+        return $qry->result_array();
+    }
+
+
+
+    public function saveData($data)
+    {
+        $this->db->insert('barang', $data);
     }
 
     public function getDataById($idData)
@@ -30,16 +39,16 @@ class Barang_model extends CI_Model
         return $sql->result_array();
     }
 
-    public function updateData($id, $data, $tabel)
+    public function updateData($id, $data)
     {
         $this->db->where('id_barang', $id);
-        $this->db->update($tabel, $data);
+        $this->db->update('barang', $data);
         return  "Data " . $id . " Berhasil Diupdate";
     }
 
-    public function deleteData($id, $tabel)
+    public function deleteData($id)
     {
         $this->db->where('id_barang', $id);
-        $this->db->delete($tabel);
+        $this->db->delete('barang');
     }
 }

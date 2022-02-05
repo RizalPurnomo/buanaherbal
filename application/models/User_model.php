@@ -11,47 +11,47 @@ class User_model extends CI_Model
 
     public function getValidUser($username, $password)
     {
-        $sql = "SELECT * FROM user 
+        $sql = "SELECT * FROM users 
  				where username='" . $username . "' and password='" . $password . "'";
         $qry = $this->db->query($sql);
         return $qry->result_array();
     }
 
-    public function updateLastLogin($username, $data, $tabel)
+    public function updateLastLogin($username, $data)
     {
         $this->db->where('username', $username);
-        $this->db->update($tabel, $data);
+        $this->db->update('users', $data);
         return  "Data " . $username . " Berhasil Diupdate";
     }
 
     public function getAllData()
     {
-        $sql = "SELECT * FROM user order by id_user desc";
+        $sql = "SELECT * FROM users order by id_user desc";
         $qry = $this->db->query($sql);
         return $qry->result_array();
     }
 
-    public function saveData($data, $tabel)
+    public function saveData($data)
     {
-        $this->db->insert($tabel, $data);
+        $this->db->insert('users', $data);
     }
 
-    public function updateData($id, $data, $tabel)
+    public function updateData($id, $data)
     {
         $this->db->where('id_user', $id);
-        $this->db->update($tabel, $data);
+        $this->db->update('users', $data);
         return  "Data " . $id . " Berhasil Diupdate";
     }
 
-    public function deleteData($id, $tabel)
+    public function deleteData($id)
     {
         $this->db->where('id_user', $id);
-        $this->db->delete($tabel);
+        $this->db->delete('user');
     }
 
     public function getDataById($idData)
     {
-        $query = "SELECT * FROM user WHERE id_user='$idData'";
+        $query = "SELECT * FROM users WHERE id_user='$idData'";
         $sql = $this->db->query($query);
         return $sql->result_array();
     }

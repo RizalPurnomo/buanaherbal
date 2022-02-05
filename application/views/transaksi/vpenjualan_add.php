@@ -10,13 +10,13 @@
         $('#modal-lg').modal('show');
     }
 
-    function getMaxIdPembelian() {
+    function getMaxIdPenjualan() {
         $.ajax({
             type: "POST",
-            url: '<?php echo base_url('pembelian/getMaxIdPembelian'); ?>',
+            url: '<?php echo base_url('penjualan/getMaxIdPenjualan'); ?>',
             success: function(result) {
                 console.log(result);
-                $("#id_pembelian").val(result)
+                $("#id_penjualan").val(result)
             }
         })
     }
@@ -36,7 +36,7 @@
             })
             return;
         }
-        getMaxIdPembelian();
+        getMaxIdPenjualan();
 
         id_barang = $("#id_barang").val();
         nama_barang = $("#nama_barang").val();
@@ -81,7 +81,7 @@
         for (var i = 0; i < row.length; i++) {
             var col = $(row[i]).find("td");
             datadetail.push({
-                "id_pembelian": $("#id_pembelian").val(),
+                "id_penjualan": $("#id_penjualan").val(),
                 "id_barang": col[0].innerHTML,
                 "qty_masuk": col[2].innerHTML.replace(',', ''),
                 "qty_keluars": '',
@@ -90,14 +90,14 @@
         }
 
         let dataArray = {
-            "pembelian": {
+            "penjualan": {
                 "id_pembelian": $("#id_pembelian").val(),
                 "id_user": $("#id_user").val(),
                 "tgl_pembelian": $("#tgl_pembelian").val(),
                 "id_suplier": $("#suplier").val(),
                 "keterangan": $("#ket").val()
             },
-            "pembelian_detail": datadetail
+            "penjualan_detail": datadetail
 
         }
 
@@ -106,7 +106,7 @@
         $.ajax({
             type: "POST",
             data: dataArray,
-            url: '<?php echo base_url('pembelian/saveData'); ?>',
+            url: '<?php echo base_url('penjualan/saveData'); ?>',
             success: function(result) {
                 Swal.fire({
                     icon: 'success',
@@ -116,8 +116,7 @@
                 })
 
                 console.log(result);
-                // window.location = "<?php echo base_url(); ?>penjualan/detailPrint/" + $("#idpenjualan").val();
-                window.location = "<?php echo base_url(); ?>pembelian";
+                window.location = "<?php echo base_url(); ?>penjualan";
             }
         })
 
@@ -131,12 +130,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Tambah Pembelian</h1>
+                    <h1 class="m-0">Tambah Penjualan</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>barang">Pembelian</a></li>
-                        <li class="breadcrumb-item active">Tambah Pembelian</li>
+                        <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>barang">Penjualan</a></li>
+                        <li class="breadcrumb-item active">Tambah Penjualan</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -150,7 +149,7 @@
             <!-- <div class="row"> -->
             <div class="card">
                 <div class="card-header">
-                    Tambah Pembelian
+                    Tambah Penjualan
                 </div>
                 <div class="card-body">
                     <!-- <form class="form-horizontal"> -->
@@ -167,13 +166,13 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Suplier</label>
+                            <label class="col-sm-2 col-form-label">Customer</label>
                             <div class="col-sm-10">
-                                <select class="form-control select2" style="width: 100%;" id="suplier">
-                                    <option value="">-- Pilih Suplier --</option>
-                                    <?php for ($a = 0; $a < count($suplier); $a++) {  ?>
-                                        <option value="<?php echo $suplier[$a]['id_suplier'] ?>">
-                                            <?php echo $suplier[$a]['nama_suplier'];  ?>
+                                <select class="form-control select2" style="width: 100%;" id="customer">
+                                    <option value="">-- Pilih Customer --</option>
+                                    <?php for ($a = 0; $a < count($customer); $a++) {  ?>
+                                        <option value="<?php echo $customer[$a]['id_customer'] ?>">
+                                            <?php echo $customer[$a]['nama_customer'] . ' | ' . $customer[$a]['alamat'];  ?>
                                         </option>
                                     <?php } ?>
                                 </select>
@@ -211,7 +210,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="ket" class="col-sm-2 col-form-label">Harga Beli</label>
+                            <label for="ket" class="col-sm-2 col-form-label">Harga Jual</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="harga" name="harga" placeholder="Harga">
                             </div>
@@ -245,7 +244,7 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Pembayaran</label>
                         <div class="col-sm-10">
-                            <select class="form-control" style="width: 100%;" id="suplier">
+                            <select class="form-control" style="width: 100%;" id="pembayaran">
                                 <option value="cash">Cash</option>
                             </select>
                         </div>
