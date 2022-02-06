@@ -21,8 +21,8 @@ class Barang extends CI_Controller
 
     public function add()
     {
-
-        $this->load->view('master/vbarang_add');
+        $data['kategori'] = $this->barang_model->getAllKategori();
+        $this->load->view('master/vbarang_add', $data);
     }
 
     public function saveData()
@@ -35,6 +35,7 @@ class Barang extends CI_Controller
     function edit($idData)
     {
         if (isset($idData)) {
+            $data['kategori'] = $this->barang_model->getAllKategori();
             $data['barang'] = $this->barang_model->getDataById($idData);
         }
         // print_r($data);

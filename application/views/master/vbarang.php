@@ -95,7 +95,7 @@
                                             <td><?php echo $barang[$a]['nama_barang'] ?></td>
                                             <td><?php echo $barang[$a]['barcode'] ?></td>
                                             <td><?php echo $barang[$a]['kategori'] ?></td>
-                                            <td><?php echo number_format($barang[$a]['stock']) ?></td>
+                                            <td><?php echo number_format($barang[$a]['stocks']) ?></td>
                                             <td><?php echo $barang[$a]['satuan'] ?></td>
                                             <td><?php echo number_format($barang[$a]['harga_juals']) ?></td>
 

@@ -94,8 +94,8 @@
                                             <td><?php echo $pembelian[$a]['real_name'] ?></td>
                                             <td>
                                                 <div class="text-center">
-                                                    <a class="btn btn-large btn-primary" href="javascript:selectData('pembelian<?php echo $pembelian[$a]['id_pembelian']; ?>')">Edit</a>
-                                                    | <a class="btn btn-large btn-danger" href="javascript:deleteData('pembelian<?php echo $pembelian[$a]['id_pembelian']; ?>')">Delete</a>
+                                                    <a class="btn btn-large btn-primary" href="javascript:selectData('pembelian<?php echo $pembelian[$a]['id_pembelian']; ?>')"><i class="fas fa-edit"></i></a>
+                                                    | <a class="btn btn-large btn-danger" href="javascript:deleteData('pembelian<?php echo $pembelian[$a]['id_pembelian']; ?>')"><i class="fas fa-trash-alt"></i></a>
 
                                                 </div>
                                             </td>

@@ -3,7 +3,7 @@
 
 <script type="text/javascript">
     function simpan() {
-        if ($("#namaBarang").val() == "" || $("#kategori").val() == "" || $("#stock").val() == "" || $("#satuan").val() == "" || $("#harga").val() == "") {
+        if ($("#namaBarang").val() == "" || $("#kategori").val() == "" || $("#satuan").val() == "" || $("#harga").val() == "") {
             Swal.fire({
                 icon: 'warning',
                 text: 'Harap Melengkapi Data!',
@@ -16,7 +16,7 @@
                 "nama_barang": $("#namaBarang").val(),
                 "barcode": $("#barcode").val(),
                 "kategori": $("#kategori").val(),
-                "stock": $("#stock").val(),
+                // "stock": $("#stock").val(),
                 "satuan": $("#satuan").val(),
                 "harga_juals": $("#harga").val()
             }
@@ -87,17 +87,24 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="kategori" class="col-sm-2 col-form-label">Kategori</label>
+                            <label class="col-sm-2 col-form-label">Kategori</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="kategori" name="kategori" placeholder="Kategori">
+                                <select class="form-control select2" style="width: 100%;" id="kategori">
+                                    <option value="">-- Pilih Kategori --</option>
+                                    <?php for ($a = 0; $a < count($kategori); $a++) {  ?>
+                                        <option value="<?php echo $kategori[$a]['nama_kategori'] ?>">
+                                            <?php echo $kategori[$a]['nama_kategori'];  ?>
+                                        </option>
+                                    <?php } ?>
+                                </select>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <!-- <div class="form-group row">
                             <label for="stock" class="col-sm-2 col-form-label">Stock</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="stock" name="stock" placeholder="Stock">
                             </div>
-                        </div>
+                        </div> -->
                         <div class="form-group row">
                             <label for="satuan" class="col-sm-2 col-form-label">Satuan</label>
                             <div class="col-sm-10">

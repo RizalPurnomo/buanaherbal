@@ -16,7 +16,7 @@
                 "nama_barang": $("#namaBarang").val(),
                 "barcode": $("#barcode").val(),
                 "kategori": $("#kategori").val(),
-                "stock": $("#stock").val().replace(',', ''),
+                // "stock": $("#stock").val().replace(',', ''),
                 "satuan": $("#satuan").val(),
                 "harga_juals": $("#harga").val().replace(',', '')
             }
@@ -93,17 +93,26 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="kategori" class="col-sm-2 col-form-label">Kategori</label>
+                            <label class="col-sm-2 col-form-label">Kategori</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="kategori" name="kategori" placeholder="Kategori" value="<?php echo $barang[0]['kategori']; ?>">
+                                <select class="form-control select2" style="width: 100%;" id="kategori">
+                                    <option value="">-- Pilih Kategori --</option>
+                                    <?php for ($a = 0; $a < count($kategori); $a++) {  ?>
+                                        <option value="<?php echo $kategori[$a]['nama_kategori'] ?>" <?php if ($kategori[$a]['nama_kategori'] == $barang[0]['kategori']) {
+                                                                                                            echo "selected";
+                                                                                                        } ?>>
+                                            <?php echo $kategori[$a]['nama_kategori'];  ?>
+                                        </option>
+                                    <?php } ?>
+                                </select>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <!-- <div class="form-group row">
                             <label for="stock" class="col-sm-2 col-form-label">Stock</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="stock" name="stock" placeholder="Stock" value="<?php echo number_format($barang[0]['stock']); ?>">
                             </div>
-                        </div>
+                        </div> -->
                         <div class="form-group row">
                             <label for="satuan" class="col-sm-2 col-form-label">Satuan</label>
                             <div class="col-sm-10">

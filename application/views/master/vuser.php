@@ -95,8 +95,8 @@
 
                                             <td>
                                                 <div class="text-center">
-                                                    <a class="btn btn-large btn-primary" href="javascript:selectData('user<?php echo $user[$a]['id_user']; ?>')">Edit</a>
-                                                    | <a class="btn btn-large btn-danger" href="javascript:deleteData('user<?php echo $user[$a]['id_user']; ?>')">Delete</a>
+                                                    <a class="btn btn-large btn-primary" href="javascript:selectData('user<?php echo $user[$a]['id_user']; ?>')"><i class="fas fa-edit"></i></a>
+                                                    | <a class="btn btn-large btn-danger" href="javascript:deleteData('user<?php echo $user[$a]['id_user']; ?>')"><i class="fas fa-trash-alt"></i></a>
 
                                                 </div>
                                             </td>

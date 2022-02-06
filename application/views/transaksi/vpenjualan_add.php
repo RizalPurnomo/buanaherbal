@@ -22,14 +22,15 @@
     }
 
     function pilihBarang(id) {
-        $("#id_barang").val($("#" + id + " td")[2].innerHTML);
-        $("#nama_barang").val($("#" + id + " td")[3].innerHTML);
-        $("#satuan").val($("#" + id + " td")[6].innerHTML);
+        $("#id_pembelian_detail").val($("#" + id + " td")[1].innerHTML);
+        $("#nama_barang").val($("#" + id + " td")[2].innerHTML);
+        $("#satuan").val($("#" + id + " td")[5].innerHTML);
+        $("#id_barang").val($("#" + id + " td")[6].innerHTML);
         $('#modal-lg').modal('hide');
     }
 
     function tambah() {
-        if ($("#id_barang").val() == "") {
+        if ($("#id_barang").val() == "" || $("#qty").val() == "" || $("#harga").val() == "") {
             Swal.fire({
                 icon: 'warning',
                 text: 'Harap Melengkapi Data!',
@@ -78,23 +79,36 @@
         var row = $("#vbarang tbody tr");
         var jml = 0;
         var datadetail = new Array();
+        var datadetailpenjualan = new Array();
+        var datadetailpembelian = new Array();
         for (var i = 0; i < row.length; i++) {
             var col = $(row[i]).find("td");
             datadetail.push({
                 "id_penjualan": $("#id_penjualan").val(),
                 "id_barang": col[0].innerHTML,
-                "qty_masuk": col[2].innerHTML.replace(',', ''),
-                "qty_keluars": '',
-                "harga_beli": col[3].innerHTML.replace(',', ''),
+                "qty_keluar": col[2].innerHTML.replace(',', ''),
+                "harga_jual": col[3].innerHTML.replace(',', ''),
+            });
+            datadetailpenjualan.push({
+                "id_penjualan": $("#id_penjualan").val(),
+                "id_barang": col[0].innerHTML,
+                "qty_keluar": col[2].innerHTML.replace(',', ''),
+                "harga_jual": col[3].innerHTML.replace(',', ''),
+            });
+            datadetailpembelian.push({
+                "id_penjualan": $("#id_penjualan").val(),
+                "id_barang": col[0].innerHTML,
+                "qty_keluar": col[2].innerHTML.replace(',', ''),
+                "harga_jual": col[3].innerHTML.replace(',', ''),
             });
         }
 
         let dataArray = {
             "penjualan": {
-                "id_pembelian": $("#id_pembelian").val(),
+                "id_penjualan": $("#id_penjualan").val(),
                 "id_user": $("#id_user").val(),
-                "tgl_pembelian": $("#tgl_pembelian").val(),
-                "id_suplier": $("#suplier").val(),
+                "tgl_penjualan": $("#tgl_penjualan").val(),
+                "id_customer": $("#customer").val(),
                 "keterangan": $("#ket").val()
             },
             "penjualan_detail": datadetail
@@ -187,16 +201,27 @@
                         <hr />
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">ID Barang</label>
+                            <div class="col-sm-10">
+                                <div class="input-group input-group">
+                                    <input type="text" class="form-control" id="id_barang" name="ket" placeholder="Id Barang" disabled>
+                                    <span class="input-group-append">
+                                        <button onclick="menuBarang()" class="btn btn-primary"><i class="fa fa-folder-open" aria-hidden="true"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- <label class="col-sm-2 col-form-label">ID Barang</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="id_barang" name="ket" placeholder="Id Barang" disabled>
                             </div>
                             <div class="col-sm-1">
                                 <button onclick="menuBarang()" class="btn btn-primary"><i class="fa fa-folder-open" aria-hidden="true"></i></button>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="form-group row">
                             <label for="ket" class="col-sm-2 col-form-label">Nama Barang</label>
                             <div class="col-sm-10">
+                                <input type="text" class="form-control" id="id_pembelian_detail" name="id_pembelian_detail" placeholder="Id Pembelian Detail" disabled>
                                 <input type="text" class="form-control" id="nama_barang" name="nama_barang" placeholder="Nama Barang" disabled>
                             </div>
                         </div>
@@ -289,29 +314,33 @@
                             <table id="example3" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>No </th>
+                                        <!-- <th>No </th> -->
                                         <th>Action</th>
                                         <th>Id Barang</th>
                                         <th>Nama Barang</th>
                                         <th>Kategori</th>
                                         <th>Stock</th>
                                         <th>Satuan</th>
+                                        <th>Id Pembelian</th>
+                                        <th>Tgl Pembelian</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php if (!empty($barang)) {
                                         for ($a = 0; $a < count($barang); $a++) { ?>
-                                            <?php $idbarang = $barang[$a]['id_barang']; ?>
+                                            <?php $idbarang = $barang[$a]['id_pembelian_detail']; ?>
                                             <tr id="barang<?php echo $idbarang; ?>">
-                                                <td><?php echo $a + 1 ?></td>
+                                                <!-- <td><?php echo $a + 1 ?></td> -->
                                                 <td>
-                                                    <a class="btn btn-large btn-primary" href="javascript:pilihBarang('barang<?php echo $barang[$a]['id_barang']; ?>')">Pilih</a>
+                                                    <a class="btn btn-large btn-primary" href="javascript:pilihBarang('barang<?php echo $barang[$a]['id_pembelian_detail']; ?>')"><i class="fas fa-plus-circle"></i></a>
                                                 </td>
                                                 <td><?php echo $idbarang ?></td>
                                                 <td><?php echo $barang[$a]['nama_barang'] ?></td>
                                                 <td><?php echo $barang[$a]['kategori'] ?></td>
-                                                <td><?php echo $barang[$a]['stock'] ?></td>
+                                                <td><?php echo $barang[$a]['stocks'] ?></td>
                                                 <td><?php echo $barang[$a]['satuan'] ?></td>
+                                                <td><?php echo $barang[$a]['id_barang'] ?></td>
+                                                <td><?php echo $barang[$a]['tgl_pembelian'] ?></td>
                                             </tr>
                                     <?php }
                                     } ?>

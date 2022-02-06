@@ -21,7 +21,7 @@ class penjualan extends CI_Controller
 
     public function add()
     {
-        $data['barang'] = $this->barang_model->getAllData();
+        $data['barang'] = $this->barang_model->getBarangReady();
         $data['customer'] = $this->customer_model->getAllData();
         $this->load->view('transaksi/vpenjualan_add', $data);
     }
