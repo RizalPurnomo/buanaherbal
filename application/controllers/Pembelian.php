@@ -31,13 +31,15 @@ class Pembelian extends CI_Controller
         $pembelian            = $this->input->post('pembelian');
         $pembelian_detail      = $this->input->post('pembelian_detail');
 
-        //insert Data
-        $this->pembelian_model->saveData($pembelian);
+        $this->pembelian_model->saveData($pembelian, $pembelian_detail);
+    }
 
-        for ($i = 0; $i < count($pembelian_detail); $i++) {
-            //insert Data Detail
-            $this->pembelian_model->saveDataDetail($pembelian_detail[$i]);
+    function delete($idData)
+    {
+        if (isset($idData)) {
+            $this->pembelian_model->deleteData($idData);
         }
+        return "Data Berhasil Di Delete";
     }
 
 
@@ -48,5 +50,12 @@ class Pembelian extends CI_Controller
     {
         $id_pembelian   = $this->pembelian_model->getIdData();
         echo $id_pembelian;
+    }
+
+    function getPembelianDetail()
+    {
+        $id_pembelian    = $this->input->post('id_pembelian');
+        $data['pembelian'] = $this->pembelian_model->getPembelianById($id_pembelian);
+        echo json_encode($data);
     }
 }

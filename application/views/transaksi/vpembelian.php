@@ -2,6 +2,40 @@
 <?php $this->load->view('vsidebar'); ?>
 
 <script type="text/javascript">
+    function getDetail(id) {
+        let no = $("#" + id + " td")[1].innerHTML;
+        let id_pembelian = $("#" + id + " td")[2].innerHTML;
+
+        $.ajax({
+            type: "POST",
+            data: {
+                "id_pembelian": id_pembelian
+            },
+            url: "<?php echo base_url(); ?>pembelian/getPembelianDetail/",
+            success: function(data) {
+                myObj = JSON.parse(data);
+                objPembelian = myObj['pembelian'];
+                console.log(data);
+                console.log(myObj);
+                var txt = "";
+                for (x in objPembelian) {
+
+                    txt += `	
+                            <tr id="pembelian${no}${parseInt(x) + parseInt(1)}" data-toggle="collapse"  class="accordion-toggle" data-target="#demo10">
+                                <td>${parseInt(x) + parseInt(1)}</td>    
+                                <td>${objPembelian[x].id_barang}</td>
+                                <td>${objPembelian[x].nama_barang}</td>
+                                <td>${objPembelian[x].kategori}</td>
+                                <td>${objPembelian[x].qty_masuk}</td>
+                            </tr>						
+                             `;
+                }
+                document.getElementById("detail" + no).innerHTML = txt;
+
+            }
+        })
+    }
+
     function selectData(id) {
         let idData = $("#" + id + " td")[1].innerHTML;
         console.log(idData);
@@ -74,6 +108,7 @@
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
+                                    <th></th>
                                     <th>No </th>
                                     <th>Id pembelian</th>
                                     <th>Tanggal</th>
@@ -86,7 +121,9 @@
                                 <?php if (!empty($pembelian)) {
                                     for ($a = 0; $a < count($pembelian); $a++) { ?>
                                         <?php $idpembelian = $pembelian[$a]['id_pembelian']; ?>
-                                        <tr id="pembelian<?php echo $idpembelian; ?>">
+                                        <!-- <tr id="pembelian<?php echo $idpembelian; ?>"> -->
+                                        <tr id="pembelian<?php echo $a + 1; ?>" data-toggle="collapse" data-target="#demo<?php echo $a + 1; ?>" class="accordion-toggle info">
+                                            <td><button class="btn btn-default btn-xs" onclick="getDetail('pembelian<?php echo $a + 1; ?>')"><span class="fas fa-eye"></span></button></td>
                                             <td><?php echo $a + 1 ?></td>
                                             <td><?php echo $idpembelian ?></td>
                                             <td><?php echo $pembelian[$a]['tgl_pembelian'] ?></td>
@@ -96,6 +133,29 @@
                                                 <div class="text-center">
                                                     <a class="btn btn-large btn-primary" href="javascript:selectData('pembelian<?php echo $pembelian[$a]['id_pembelian']; ?>')"><i class="fas fa-edit"></i></a>
                                                     | <a class="btn btn-large btn-danger" href="javascript:deleteData('pembelian<?php echo $pembelian[$a]['id_pembelian']; ?>')"><i class="fas fa-trash-alt"></i></a>
+
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="10" class="hiddenRow">
+                                                <div class="accordian-body collapse" id="demo<?php echo $a + 1; ?>">
+                                                    <table class="table table-striped table-bordered">
+                                                        <thead>
+                                                            <tr class="info">
+                                                                <th>No</th>
+                                                                <th>Id Barang</th>
+                                                                <th>Nama</th>
+                                                                <th>Kategori</th>
+                                                                <th>Qty Beli</th>
+                                                            </tr>
+                                                        </thead>
+
+                                                        <tbody id="detail<?php echo $a + 1; ?>">
+
+
+                                                        </tbody>
+                                                    </table>
 
                                                 </div>
                                             </td>

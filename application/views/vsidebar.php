@@ -7,6 +7,8 @@ $suplier = ($this->uri->segment(1) == 'suplier' ? 'active' : '');
 $barang = ($this->uri->segment(1) == 'barang' ? 'active' : '');
 $pembelian = ($this->uri->segment(1) == 'pembelian' ? 'active' : '');
 $penjualan = ($this->uri->segment(1) == 'penjualan' ? 'active' : '');
+$laporan = ($this->uri->segment(1) == 'laporan' ? 'menu-open' : '');
+$lapPenjualan = ($this->uri->segment(2) == 'penjualan' ? 'active' : '');
 ?>
 
 
@@ -78,6 +80,7 @@ $penjualan = ($this->uri->segment(1) == 'penjualan' ? 'active' : '');
                             </a>
                         </li>
                     </ul>
+                </li>
                 <li class="nav-item">
                     <a href="<?php echo base_url(); ?>pembelian" class="nav-link <?php echo $pembelian; ?>">
                         <i class="fa fa-cart-plus" aria-hidden="true"></i>
@@ -94,8 +97,24 @@ $penjualan = ($this->uri->segment(1) == 'penjualan' ? 'active' : '');
                         </p>
                     </a>
                 </li>
-                </li>
+                <!-- <li class="nav-item <?php echo $laporan; ?>">
+                    <a href="#" class="nav-link">
+                        <i class="fa fa-server" aria-hidden="true"></i>
+                        <p>
+                            Laporan
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?php echo base_url(); ?>laporan/penjualan" class="nav-link <?php echo $lapPenjualan; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Panjualan</p>
+                            </a>
+                        </li>
 
+                    </ul>
+                </li> -->
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

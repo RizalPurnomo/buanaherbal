@@ -34,13 +34,29 @@ class Pembelian_model extends CI_Model
         return $idData;
     }
 
-    public function saveData($data)
+    public function getPembelianById($id_pembelian)
     {
-        $this->db->insert('pembelian', $data);
+        $sql = "SELECT * FROM pembelian_detail a
+            INNER JOIN barang b on a.id_barang=b.id_barang WHERE id_pembelian='$id_pembelian'";
+        $qry = $this->db->query($sql);
+        return $qry->result_array();
     }
 
-    public function saveDataDetail($data)
+    public function saveData($pembelian, $pembelian_detail)
     {
-        $this->db->insert('pembelian_detail', $data);
+        $this->db->trans_start();
+
+        $this->db->insert('pembelian', $pembelian);
+        for ($i = 0; $i < count($pembelian_detail); $i++) {
+            $this->db->insert('pembelian_detail', $pembelian_detail[$i]);
+        }
+
+        $this->db->trans_complete();
+    }
+
+    public function deleteData($id)
+    {
+        $this->db->where('id_pembelian', $id);
+        $this->db->delete('pembelian');
     }
 }

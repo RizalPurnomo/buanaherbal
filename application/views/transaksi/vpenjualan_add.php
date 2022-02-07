@@ -40,12 +40,14 @@
         getMaxIdPenjualan();
 
         id_barang = $("#id_barang").val();
+        id_pembelian_detail = $("#id_pembelian_detail").val();
         nama_barang = $("#nama_barang").val();
         qty = $("#qty").val();
         harga = $("#harga").val();
         $("#vbarang tbody").append(
             `<tr>
                 <td>${id_barang}</td>
+                <td>${id_pembelian_detail}</td>
                 <td>${nama_barang}</td>
                 <td align="right">${numberWithCommas(qty)}</td>
                 <td align="right">${numberWithCommas(harga)}</td>
@@ -53,6 +55,7 @@
             </tr>`
         );
         $("#id_barang").val("");
+        $("#id_pembelian_detail").val("");
         $("#nama_barang").val("");
         $("#qty").val("");
         $("#harga").val("");
@@ -79,27 +82,19 @@
         var row = $("#vbarang tbody tr");
         var jml = 0;
         var datadetail = new Array();
-        var datadetailpenjualan = new Array();
         var datadetailpembelian = new Array();
         for (var i = 0; i < row.length; i++) {
             var col = $(row[i]).find("td");
             datadetail.push({
                 "id_penjualan": $("#id_penjualan").val(),
+                "id_pembelian_detail": col[1].innerHTML,
                 "id_barang": col[0].innerHTML,
-                "qty_keluar": col[2].innerHTML.replace(',', ''),
-                "harga_jual": col[3].innerHTML.replace(',', ''),
-            });
-            datadetailpenjualan.push({
-                "id_penjualan": $("#id_penjualan").val(),
-                "id_barang": col[0].innerHTML,
-                "qty_keluar": col[2].innerHTML.replace(',', ''),
-                "harga_jual": col[3].innerHTML.replace(',', ''),
+                "qty_keluar": col[3].innerHTML.replace(',', ''),
+                "harga_jual": col[4].innerHTML.replace(',', ''),
             });
             datadetailpembelian.push({
-                "id_penjualan": $("#id_penjualan").val(),
-                "id_barang": col[0].innerHTML,
-                "qty_keluar": col[2].innerHTML.replace(',', ''),
-                "harga_jual": col[3].innerHTML.replace(',', ''),
+                "id_pembelian_detail": col[1].innerHTML,
+                "qty_keluars": col[3].innerHTML.replace(',', '')
             });
         }
 
@@ -111,7 +106,8 @@
                 "id_customer": $("#customer").val(),
                 "keterangan": $("#ket").val()
             },
-            "penjualan_detail": datadetail
+            "penjualan_detail": datadetail,
+            "pembelian_detail": datadetailpembelian
 
         }
 
@@ -170,13 +166,13 @@
                     <div class="card-body">
                         <div class="form-group row">
                             <input type="hidden" class="form-control" id="id_user" value="<?php echo $this->session->userdata('id_user'); ?>" disabled placeholder="ID User">
-                            <input type="hidden" class="form-control" id="id_pembelian" disabled placeholder="ID Pembelian">
+                            <input type="text" class="form-control" id="id_penjualan" disabled placeholder="ID Penjualan">
                             <label for="barcode" class="col-sm-2 col-form-label">Tanggal</label>
                             <div class="col-sm-10 input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                 </div>
-                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd" data-mask value="<?php echo date("Y-m-d") ?>" id="tgl_pembelian" name="tgl_pembelian">
+                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd" data-mask value="<?php echo date("Y-m-d") ?>" id="tgl_penjualan" name="tgl_penjualan">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -251,6 +247,7 @@
                                 <thead>
                                     <tr>
                                         <th>Id Barang</th>
+                                        <th>Id Pembelian</th>
                                         <th>Nama Barang</th>
                                         <th>Stock</th>
                                         <th>Harga</th>
@@ -316,12 +313,12 @@
                                     <tr>
                                         <!-- <th>No </th> -->
                                         <th>Action</th>
-                                        <th>Id Barang</th>
+                                        <th>Id Pembelian</th>
                                         <th>Nama Barang</th>
                                         <th>Kategori</th>
                                         <th>Stock</th>
                                         <th>Satuan</th>
-                                        <th>Id Pembelian</th>
+                                        <th>Id Barang</th>
                                         <th>Tgl Pembelian</th>
                                     </tr>
                                 </thead>
