@@ -10,6 +10,10 @@
         $('#modal-lg').modal('show');
     }
 
+    function menuCustomer() {
+        $('#modal-customer').modal('show');
+    }
+
     function getMaxIdPenjualan() {
         $.ajax({
             type: "POST",
@@ -62,8 +66,42 @@
 
     }
 
-    function simpan() {
+    function simpanCustomer() {
+        if ($("#nama2").val() == "" || $("#alamat2").val() == "" || $("#tlp2").val() == "") {
+            Swal.fire({
+                icon: 'warning',
+                text: 'Harap Melengkapi Data!',
+            })
+            return;
+        }
 
+        var dataArray = {
+            "customer": {
+                "nama_customer": $("#nama2").val(),
+                "alamat": $("#alamat2").val(),
+                "tlp": $("#tlp2").val()
+            }
+        }
+
+        console.log(dataArray);
+        // return;
+        $.ajax({
+            type: "POST",
+            data: dataArray,
+            url: '<?php echo base_url('customer/saveData'); ?>',
+            success: function(result) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Data Berhasil Disimpan',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                window.location = "<?php echo base_url(); ?>penjualan/add";
+            }
+        })
+    }
+
+    function simpan() {
         if ($("#id_user").val() == "") {
             Swal.fire({
                 icon: 'warning',
@@ -166,7 +204,7 @@
                     <div class="card-body">
                         <div class="form-group row">
                             <input type="hidden" class="form-control" id="id_user" value="<?php echo $this->session->userdata('id_user'); ?>" disabled placeholder="ID User">
-                            <input type="text" class="form-control" id="id_penjualan" disabled placeholder="ID Penjualan">
+                            <input type="hidden" class="form-control" id="id_penjualan" disabled placeholder="ID Penjualan">
                             <label for="barcode" class="col-sm-2 col-form-label">Tanggal</label>
                             <div class="col-sm-10 input-group">
                                 <div class="input-group-prepend">
@@ -177,7 +215,7 @@
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Customer</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-9">
                                 <select class="form-control select2" style="width: 100%;" id="customer">
                                     <option value="">-- Pilih Customer --</option>
                                     <?php for ($a = 0; $a < count($customer); $a++) {  ?>
@@ -186,6 +224,9 @@
                                         </option>
                                     <?php } ?>
                                 </select>
+                            </div>
+                            <div class="col-sm-1">
+                                <button onclick="menuCustomer()" class="btn btn-primary"><i class="fa fa-folder-open" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -206,18 +247,11 @@
                                 </div>
                             </div>
 
-                            <!-- <label class="col-sm-2 col-form-label">ID Barang</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" id="id_barang" name="ket" placeholder="Id Barang" disabled>
-                            </div>
-                            <div class="col-sm-1">
-                                <button onclick="menuBarang()" class="btn btn-primary"><i class="fa fa-folder-open" aria-hidden="true"></i></button>
-                            </div> -->
                         </div>
                         <div class="form-group row">
                             <label for="ket" class="col-sm-2 col-form-label">Nama Barang</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="id_pembelian_detail" name="id_pembelian_detail" placeholder="Id Pembelian Detail" disabled>
+                                <input type="hidden" class="form-control" id="id_pembelian_detail" name="id_pembelian_detail" placeholder="Id Pembelian Detail" disabled>
                                 <input type="text" class="form-control" id="nama_barang" name="nama_barang" placeholder="Nama Barang" disabled>
                             </div>
                         </div>
@@ -351,6 +385,56 @@
             </div>
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-customer">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Tambah Customer</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="card">
+                    <div class="card-header">
+                        <!-- <button type="button" class="btn btn-app" data-toggle="collapse" data-target="#collapseExample" aria-expanded="true" aria-controls="collapseExample">
+                            <i class="fa fa-plus-square" aria-hidden="true"></i> Tambah
+                        </button> -->
+                        Customer
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <label for="nama" class="col-sm-2 col-form-label">Nama Customer</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="nama2" name="nama2" placeholder="Nama Customer">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="alamat2" name="alamat2" placeholder="Alamat">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="tlp" class="col-sm-2 col-form-label">Telpon</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="tlp2" name="tlp2" placeholder="Telpon">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary float-right" onclick="simpanCustomer()">Simpan</button>
             </div>
         </div>
     </div>

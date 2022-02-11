@@ -15,4 +15,29 @@ class Suplier_model extends CI_Model
         $qry = $this->db->query($sql);
         return $qry->result_array();
     }
+
+    public function saveData($data)
+    {
+        $this->db->insert('suplier', $data);
+    }
+
+    public function getDataById($idData)
+    {
+        $query = "SELECT * FROM suplier WHERE id_suplier='$idData'";
+        $sql = $this->db->query($query);
+        return $sql->result_array();
+    }
+
+    public function updateData($id, $data)
+    {
+        $this->db->where('id_suplier', $id);
+        $this->db->update('suplier', $data);
+        return  "Data " . $id . " Berhasil Diupdate";
+    }
+
+    public function deleteData($id)
+    {
+        $this->db->where('id_suplier', $id);
+        $this->db->delete('suplier');
+    }
 }

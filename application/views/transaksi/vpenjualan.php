@@ -130,8 +130,8 @@
                                             <td><?php echo $penjualan[$a]['real_name'] ?></td>
                                             <td>
                                                 <div class="text-center">
-                                                    <a class="btn btn-large btn-primary" href="javascript:selectData('penjualan<?php echo $penjualan[$a]['id_penjualan']; ?>')">Edit</a>
-                                                    | <a class="btn btn-large btn-danger" href="javascript:deleteData('penjualan<?php echo $penjualan[$a]['id_penjualan']; ?>')">Delete</a>
+                                                    <a class="btn btn-large btn-primary" href="javascript:selectData('penjualan<?php echo $penjualan[$a]['id_penjualan']; ?>')"><i class="fas fa-edit"></i></a>
+                                                    | <a class="btn btn-large btn-danger" href="javascript:deleteData('penjualan<?php echo $penjualan[$a]['id_penjualan']; ?>')"><i class="fas fa-trash-alt"></i></a>
 
                                                 </div>
                                             </td>
